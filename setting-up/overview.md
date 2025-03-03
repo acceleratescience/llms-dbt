@@ -18,6 +18,6 @@ We offer an overview of how to setup various environments:
 - GitHub Codespaces
 - RunPod
 - Nvidia NIMs
-- Microsoft Azure AI Studio
+- Microsoft Azure AI Foundry
 
 Pick one on the left-hand sidebar. More may be added in the future.
