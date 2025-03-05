@@ -1,3 +1,8 @@
 openai
 python-dotenv
 rich
+llama-index
+transformers
+bm25s
+numpy
+chromadb
