@@ -1,10 +1,13 @@
 import json
+import os
 from typing import List
 
 import requests
 from bs4 import BeautifulSoup
 from langchain_core.documents import Document
 from pydantic import BaseModel, Field
+
+BRAVE_API_KEY = os.getenv("BRAVE_API_KEY")
 
 
 class BraveSearchWrapper(BaseModel):
@@ -118,3 +121,24 @@ def scrape_url(url):
     except Exception as e:
         print(f"Error processing webpage: {e}")
         return None
+    
+
+brave_client = BraveSearchWrapper(
+            api_key=BRAVE_API_KEY,
+            search_kwargs={},
+        )
+
+
+def search_brave(query: str, **kwargs):
+    response = brave_client.download_documents(query, **kwargs)
+    
+    # format the response of the top 5 results
+    formatted_response = ""
+    for result in response[:5]:
+        formatted_response += f"{result.metadata['title']}\n"
+        formatted_response += f"{result.metadata['link']}\n\n"
+
+    return formatted_response
+
+def scrape_content(url: str):
+    return scrape_url(url)

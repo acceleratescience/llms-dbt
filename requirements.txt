@@ -6,3 +6,5 @@ transformers
 bm25s
 numpy
 chromadb
+langchain
+Jinja2
