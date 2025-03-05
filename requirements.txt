@@ -8,3 +8,12 @@ numpy
 chromadb
 langchain
 Jinja2
+seaborn
+matploblib
+scikit-learn
+tqdm
+numpy
+pysyllables
+pandas
+PyMuPDF
+fitz

@@ -84,54 +84,53 @@ class BraveSearchWrapper(BaseModel):
         return response.json().get("web", {}).get("results", [])
 
 
-
 def scrape_url(url):
     # Headers to mimic a browser
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate',
-        'DNT': '1',
-        'Connection': 'keep-alive',
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "DNT": "1",
+        "Connection": "keep-alive",
     }
-    
+
     try:
         # Get the webpage with headers
         response = requests.get(url, headers=headers)
         response.raise_for_status()
-        
+
         # Parse with BeautifulSoup
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
+        soup = BeautifulSoup(response.text, "html.parser")
+
         # Remove script and style elements
-        for script in soup(['script', 'style']):
+        for script in soup(["script", "style"]):
             script.decompose()
-            
+
         # Get text and clean it up
         text = soup.get_text()
         lines = (line.strip() for line in text.splitlines())
-        text = ' '.join(chunk for chunk in lines if chunk)
-        
+        text = " ".join(chunk for chunk in lines if chunk)
+
         return text
-        
+
     except requests.RequestException as e:
         print(f"Error fetching URL: {e}")
         return None
     except Exception as e:
         print(f"Error processing webpage: {e}")
         return None
-    
+
 
 brave_client = BraveSearchWrapper(
-            api_key=BRAVE_API_KEY,
-            search_kwargs={},
-        )
+    api_key=BRAVE_API_KEY,
+    search_kwargs={},
+)
 
 
 def search_brave(query: str, **kwargs):
     response = brave_client.download_documents(query, **kwargs)
-    
+
     # format the response of the top 5 results
     formatted_response = ""
     for result in response[:5]:
@@ -139,6 +138,7 @@ def search_brave(query: str, **kwargs):
         formatted_response += f"{result.metadata['link']}\n\n"
 
     return formatted_response
+
 
 def scrape_content(url: str):
     return scrape_url(url)
