@@ -11,6 +11,7 @@ Jinja2
 seaborn
 matplotlib
 scikit-learn
+torch @ --index-url https://download.pytorch.org/whl/cpu
 tqdm
 numpy
 pandas
