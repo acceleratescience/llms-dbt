@@ -15,4 +15,3 @@ tqdm
 numpy
 pandas
 PyMuPDF
-fitz
