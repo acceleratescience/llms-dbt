@@ -26,6 +26,8 @@
 
 **Notebook** - Search
 
+**Notebooks** - Nvidia
+
 **Notebook** - Databases
 
 **Notebook** - Documents
