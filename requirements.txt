@@ -13,7 +13,6 @@ matploblib
 scikit-learn
 tqdm
 numpy
-pysyllables
 pandas
 PyMuPDF
 fitz
