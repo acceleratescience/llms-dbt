@@ -9,7 +9,7 @@ chromadb
 langchain
 Jinja2
 seaborn
-matploblib
+matplotlib
 scikit-learn
 tqdm
 numpy
